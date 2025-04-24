@@ -8,11 +8,12 @@ namespace Mercado_Trabalho.Entidade
 {
     public class Produtos
     {
-        public double UnidadeMedida {  get; set; }
+        public string UnidadeMedida {  get; set; }
         public string Nome {  get; set; }
         public string Validade {  get; set; }
         public Guid CodigoProduto { get; set; }
         public int Id { get; set; }
+        public double Peso {  get; set; }
 
     }
 }

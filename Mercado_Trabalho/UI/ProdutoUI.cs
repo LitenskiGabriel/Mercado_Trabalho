@@ -10,13 +10,14 @@ namespace Mercado_Trabalho.UI
 {
     public static class ProdutoUI
     {
-        public static void Executar()
+        public static void ExecutarProduto()
         {
             Console.Clear();
             ProdutosServico produtosServico = new ProdutosServico();
             bool executar = true;
             do
             {
+                Console.WriteLine();
                 Console.WriteLine("Informe o menu desejado");
                 Console.WriteLine("1 para cadastrar");
                 Console.WriteLine("2 para listar");
@@ -27,17 +28,27 @@ namespace Mercado_Trabalho.UI
                 {
                     case 1:
                         {
+                            Console.Clear();
                             Produtos produto = new Produtos();
+                           
                             Console.WriteLine("Informe a unidade de medida");
-                            produto.UnidadeMedida = double.Parse(Console.ReadLine());
+                            produto.UnidadeMedida = Console.ReadLine();
+
+                            Console.WriteLine("Informe o peso");
+                            produto.Peso = double.Parse(Console.ReadLine());
+
                             Console.WriteLine("Informe o nome");
                             produto.Nome = Console.ReadLine();
+
                             Console.WriteLine("Informe a validade");
                             produto.Validade = Console.ReadLine();
+
                             //Console.WriteLine("Informe o codigo");
                             produto.CodigoProduto = Guid.NewGuid();
 
                             produtosServico.Criar(produto);
+                            Console.Clear();
+
                             break;
                         }
                     case 2:
@@ -46,9 +57,11 @@ namespace Mercado_Trabalho.UI
 
                             produtos.ForEach(produto =>
                             {
-                                Console.WriteLine("Nome " + produto.Nome);
-                                Console.WriteLine("Unidade Medida " + produto.UnidadeMedida);
+                                Console.WriteLine();
+                                Console.WriteLine("Nome: " + produto.Nome);
+                                Console.WriteLine("Peso: " + produto.Peso + produto.UnidadeMedida);
                                 Console.WriteLine("Codigo " + produto.CodigoProduto);
+                                Console.WriteLine("Validade: " + produto.Validade);
                             });
 
                             break;

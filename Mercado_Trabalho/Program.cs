@@ -12,6 +12,7 @@ namespace Mercado_Trabalho
             Console.WriteLine("------------------------- Bem-vindo ao mercado baratão! -------------------------");
 
             //ClienteUI.MenuDeOpcoes();
+            ClientesServico _clientesServico = new ClientesServico();
 
             //teste
             bool executar = true;
@@ -26,14 +27,14 @@ namespace Mercado_Trabalho
 
                 switch (opcao)
                 {
-                    case 1:
+                    case 1: 
                         {
-                            ProdutoUI.Executar();
+                            ProdutoUI.ExecutarProduto();
                             break;
                         }
                     case 2:
                         {
-
+                            ClienteUI.ExecutarCliente(_clientesServico);
                             break;
                         }
                     case 3:
@@ -47,5 +48,7 @@ namespace Mercado_Trabalho
             } while (executar);
 
         }
+
+
     }
 }

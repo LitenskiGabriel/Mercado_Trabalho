@@ -8,147 +8,100 @@ using Mercado_Trabalho.Servico;
 
 namespace Mercado_Trabalho.UI
 {
-    enum MenuAcoes
-    {
-        NaoInformado,
-        Criar,
-        Atualizar,
-        Deletar,
-        Buscar,
-        Encerrar
-    }
     public class ClienteUI
     {
 
         ClientesServico clienteFunc = new();
-        static ClientesServico _clientesServico = new ClientesServico();
-        public void RegistrarCliente(Cliente cliente)
+        
+
+
+        public static void ExecutarCliente(ClientesServico _clientesServico)
         {
-            string resultadoValidacao = _clientesServico.ValidarCriacao(cliente);
-            if (resultadoValidacao == "")
+            Console.Clear();
+            bool executar = true;
+            do
             {
-                _clientesServico.Criar(cliente);
-                return;
-            }
+                Console.WriteLine();
+                Console.WriteLine("Informe o menu desejado");
+                Console.WriteLine("1 para cadastrar o cliente");
+                Console.WriteLine("2 para atualizar cliente");
+                Console.WriteLine("3 para deletar");
+                Console.WriteLine("4 para buscar");
+                Console.WriteLine("5 para sair");
 
-            Console.WriteLine(resultadoValidacao);
-        }
+                int opcao = int.Parse(Console.ReadLine());
 
-
-        public static string MenuDeOpcoes()
-        {
-            bool encerramento = false;
-            
-            
-                Console.WriteLine(
-                "Digite 1 para criar um cadastro\n"
-                + "Digite 2 para Atualizar informações de cadastro\n"
-                + "Digite 3 para Apagar seu cadastro\n"
-                + "Digite 4 para Buscar cadastro" +
-                "5 para encerrar processo"
-                );
-                MenuAcoes menuAcoes = (MenuAcoes)int.Parse(Console.ReadLine());
-
-
-
-
-                
-
-                return "";
-        }
-
-        public static void DadosParaCadastro()
-        {
-            Cliente cliente = new();
-
-            Console.WriteLine("Precisamos de seu Nome, Sobrenome, data de nascimento e cpf.");
-
-            Console.WriteLine("Nome:");
-            cliente.Nome = Console.ReadLine();
-
-            Console.WriteLine("Sobrenome:");
-            cliente.Sobrenome = Console.ReadLine();
-
-            Console.WriteLine("Data de nascimento(dd/mm/aaaa):");
-            cliente.DataNascimento = Console.ReadLine();
-        }
-        public static void PerguntaCadastro()
-        {
-            ClientesServico clientesServico = new ClientesServico();
-            Cliente clientes = new();
-
-            List<Cliente> clientesLista = new();
-
-            bool cadastro;
-            bool cadastrar;
-
-
-            Console.WriteLine("Para concluirmos sua compra, você possui um cadastro?");
-            string perguntaCadastro = Console.ReadLine().ToLower();
-
-            if (perguntaCadastro == "s" || perguntaCadastro == "sim")
-            {
-
-                ClientesServico clienteServico = new();
-
-
-                Console.WriteLine("Informe seu CPF");
-                string cpf = Console.ReadLine();
-
-                Cliente cliente = _clientesServico.BuscarPeloCpf(cpf);
-                if (cliente == null)
+                switch (opcao)
                 {
-                    Console.WriteLine("Cadastro inexistente");
+                    case 1:
+                        {
+
+                            Console.Clear();
+                            Cliente clientes = new();
+
+                            Console.WriteLine("Informe seu nome");
+                            clientes.Nome = Console.ReadLine();
+
+                            Console.WriteLine("Informe seu sobrenome");
+                            clientes.Sobrenome = Console.ReadLine();
+
+                            Console.WriteLine("Informe seu CPF.");
+                            clientes.Cpf = Console.ReadLine();
+
+                            Console.WriteLine("Informe sua data de nascimento:");
+                            clientes.DataNascimento = Console.ReadLine();
+
+                            _clientesServico.Criar(clientes);
+                            Console.Clear();
+
+                            break;
+                        }
+                    case 2:
+                        {
+                            Cliente clientes = new();
+
+                            Console.WriteLine("Digite o CPF do cadastro que deseja atualizar.");
+                            _clientesServico.BuscarPeloCpf(Console.ReadLine());
+
+
+                            Console.WriteLine("Informe um novo nome");
+                            clientes.Nome = Console.ReadLine();
+
+                            Console.WriteLine("Informe um novo sobrenome");
+                            clientes.Sobrenome = Console.ReadLine();
+
+                            _clientesServico.Atualizar(clientes);
+                            
+                            Console.Clear();
+
+                            break;
+                        }
+                    case 3:
+                        {
+                            Cliente clientes = new();
+                            Console.WriteLine("Informe o cadastro que deseja deletar (informe o CPF):");
+                            clientes.Cpf = Console.ReadLine();
+
+                            _clientesServico.Excluir(clientes);
+                            break;
+                        }
+                    case 4:
+                        {
+                            Console.WriteLine("Qual cadastro você deseja consultar(Digite o CPF do cadastro desejado)?");
+                            Cliente cpfDigitado = _clientesServico.BuscarPeloCpf(Console.ReadLine());
+                            Console.WriteLine(cpfDigitado);
+                            break;
+                        }
+                    case 5:
+                        {
+                            executar = false;
+                            break;
+                        }
+                    default:
+                        break;
                 }
-
-                else
-                {
-                    Console.WriteLine("Olá, seu cadrasto foi encontrado!");
-                }
-
-
-                Console.WriteLine("Olá " + cliente.Nome);
-
-                ///
-                ///
-                ///
-
-
-                Console.WriteLine("Você deseja se cadastrar?");
-                string perguntaCadastrar = Console.ReadLine().ToLower();
-
-                if (perguntaCadastrar == "s" || perguntaCadastrar == "sim")
-                {
-                    cadastro = true;
-
-                    Console.WriteLine("Qual seu nome e sobrenome?");
-                    clientes.Nome = Console.ReadLine();
-                    clientes.Sobrenome = Console.ReadLine();
-
-                    Console.WriteLine("Informe seu CPF e sua data de nascimento:");
-                    clientes.Cpf = Console.ReadLine();
-                    clientes.DataNascimento = Console.ReadLine();
-
-                    clientes.Id = new Guid();
-
-                }
-                else
-                {
-                    Console.Write("O preço total da sua compra foi: "); //colocar variavel contendo preco da compra
-                }
-
-            }
-
+            } while (executar);
         }
-
-        public void AdicionarCliente(Cliente cliente)
-        {
-            List<Cliente> _listaClientes = new List<Cliente>();
-
-            _listaClientes.Add(cliente);
-
-
-        }
-
+      
     }
 }
