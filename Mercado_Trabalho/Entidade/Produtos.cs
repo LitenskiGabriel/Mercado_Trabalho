@@ -12,7 +12,7 @@ namespace Mercado_Trabalho.Entidade
         public string Nome {  get; set; }
         public string Validade {  get; set; }
         public Guid CodigoProduto { get; set; }
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public double Peso {  get; set; }
 
     }

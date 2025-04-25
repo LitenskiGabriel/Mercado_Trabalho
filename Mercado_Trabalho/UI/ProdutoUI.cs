@@ -21,7 +21,8 @@ namespace Mercado_Trabalho.UI
                 Console.WriteLine("Informe o menu desejado");
                 Console.WriteLine("1 para cadastrar");
                 Console.WriteLine("2 para listar");
-                Console.WriteLine("3 para sair");
+                Console.WriteLine("3 para compras");
+                Console.WriteLine("4 para sair");
                 int opcao = int.Parse(Console.ReadLine());
 
                 switch (opcao)
@@ -67,6 +68,42 @@ namespace Mercado_Trabalho.UI
                             break;
                         }
                     case 3:
+                        {
+                            Produtos desejos = new Produtos();
+                            List<Produtos> produtos = produtosServico.BuscarTodos();
+                            produtos.ForEach(produto =>
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Nome: " + produto.Nome);
+                                Console.WriteLine("Peso: " + produto.Peso + produto.UnidadeMedida);
+                                Console.WriteLine("Codigo " + produto.CodigoProduto);
+                                Console.WriteLine("Validade: " + produto.Validade);
+                            });
+
+                            
+                            Console.WriteLine("Quantos itens você deseja comprar?");
+                            int itens = int.Parse(Console.ReadLine());
+
+                            for (int i = 0; i < itens; i++)
+                            {
+                                Console.Write($"Nome do {i}° produto: ");
+                                desejos.Nome = Console.ReadLine();
+                                Console.WriteLine();
+
+                                Console.Write($"Peso: ");
+                                desejos.Peso = Double.Parse(Console.ReadLine());
+                                Console.WriteLine();
+
+                                Console.Write($"Quantidade: ");
+                                int quant = int.Parse(Console.ReadLine());
+                                Console.WriteLine();
+                                
+                                Console.WriteLine();
+                            }
+
+                            break;
+                        }
+                    case 4:
                         {
                             executar = false;
                             break;

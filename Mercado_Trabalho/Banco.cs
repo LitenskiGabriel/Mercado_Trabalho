@@ -10,8 +10,6 @@ namespace Mercado_Trabalho
 {
     public static class Banco
     {
-
-
         public static string BuscarCaminhoBanco(string nome)
         {
             string diretorioBancoDados = Path.Combine(Environment.CurrentDirectory, "BancoDeDados");
@@ -31,4 +29,5 @@ namespace Mercado_Trabalho
 
             return caminhoCompleto;
         }
+    }
 }

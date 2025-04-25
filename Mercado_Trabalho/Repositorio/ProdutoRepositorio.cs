@@ -5,21 +5,48 @@ using System.Text;
 using System.Threading.Tasks;
 using Mercado_Trabalho.Entidade;
 using Mercado_Trabalho.Interface;
+using Newtonsoft.Json;
 
 namespace Mercado_Trabalho.Repositorio
 {
     public class ProdutoRepositorio : ICRUD<Produtos>
     {
         List<Produtos> _produtos = new List<Produtos>();
+        private readonly string _caminhoBanco;
+        public ProdutoRepositorio()
+        {
+            _caminhoBanco = Banco.BuscarCaminhoBanco("Produtos");
+            CarregarLista();
+        }
 
-        public void Atualizar(Produtos entidade)
+        private void CarregarLista()
+        {
+            string dados = File.ReadAllText(_caminhoBanco);
+
+            _produtos = JsonConvert.DeserializeObject<List<Produtos>>(dados) ?? [];
+        }
+
+        private void Salvar()
+        {
+            string dados = JsonConvert.SerializeObject(_produtos);
+
+            File.WriteAllText(_caminhoBanco, dados);
+        }
+
+        public Cliente BuscarPeloCpf(string cpf)
+        {
+            throw new NotImplementedException();
+
+        }
+
+        public void Atualizar(Produtos produtoAtualizando)
         {
             throw new NotImplementedException();
         }
 
         public Produtos BuscarPeloId(Guid id)
         {
-            throw new NotImplementedException();
+            return _produtos.FirstOrDefault(produtos => produtos.Id == id);
         }
 
         public List<Produtos> BuscarTodos()
@@ -27,15 +54,17 @@ namespace Mercado_Trabalho.Repositorio
             return _produtos;
         }
 
-        public void Criar(Produtos entidade)
+        public void Criar(Produtos produtosRegistrando)
         {
-            entidade.Id = _produtos.Any() ? _produtos.Max(x => x.Id) + 1 : 1;
-            _produtos.Add(entidade);
+            produtosRegistrando.Id = Guid.NewGuid();
+            _produtos.Add(produtosRegistrando);
+            Salvar();
         }
 
-        public void Excluir(Produtos entidade)
+        public void Excluir(Produtos produtosExcluindo)
         {
-            throw new NotImplementedException();
+            _produtos.Remove(produtosExcluindo);
+            Salvar();
         }
     }
 }

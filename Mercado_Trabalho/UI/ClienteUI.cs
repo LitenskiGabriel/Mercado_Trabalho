@@ -89,7 +89,11 @@ namespace Mercado_Trabalho.UI
                         {
                             Console.WriteLine("Qual cadastro você deseja consultar(Digite o CPF do cadastro desejado)?");
                             Cliente cpfDigitado = _clientesServico.BuscarPeloCpf(Console.ReadLine());
-                            Console.WriteLine(cpfDigitado);
+                            Console.WriteLine(
+                                $"Nome completo: {cpfDigitado.Nome} {cpfDigitado.Sobrenome}\n" +
+                                $"Data de Nascimento: {cpfDigitado.DataNascimento}\n" +
+                                $"Cpf: {cpfDigitado.Cpf}");
+
                             break;
                         }
                     case 5:
