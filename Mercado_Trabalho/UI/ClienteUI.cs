@@ -25,9 +25,9 @@ namespace Mercado_Trabalho.UI
                 Console.WriteLine("Informe o menu desejado");
                 Console.WriteLine("1 para cadastrar o cliente");
                 Console.WriteLine("2 para atualizar cliente");
-                Console.WriteLine("3 para deletar");
-                Console.WriteLine("4 para buscar");
-                Console.WriteLine("5 para sair");
+                Console.WriteLine("3 para buscar");
+                Console.WriteLine("4 para sair");
+                Console.WriteLine("5 para deletar");
 
                 int opcao = int.Parse(Console.ReadLine());
 
@@ -78,15 +78,6 @@ namespace Mercado_Trabalho.UI
                         }
                     case 3:
                         {
-                            Cliente clientes = new();
-                            Console.WriteLine("Informe o cadastro que deseja deletar (informe o CPF):");
-                            clientes.Cpf = Console.ReadLine();
-
-                            _clientesServico.Excluir(clientes);
-                            break;
-                        }
-                    case 4:
-                        {
                             Console.WriteLine("Qual cadastro você deseja consultar(Digite o CPF do cadastro desejado)?");
                             Cliente cpfDigitado = _clientesServico.BuscarPeloCpf(Console.ReadLine());
                             Console.WriteLine(
@@ -96,9 +87,18 @@ namespace Mercado_Trabalho.UI
 
                             break;
                         }
-                    case 5:
+                    case 4:
                         {
                             executar = false;
+                            break;
+                        }
+                    case 5:
+                        {
+                            Cliente clientes = new();
+                            Console.WriteLine("Informe o cadastro que deseja deletar (informe o CPF):");
+                            clientes.Cpf = Console.ReadLine();
+
+                            _clientesServico.Excluir(clientes);
                             break;
                         }
                     default:
