@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mercado_Trabalho.Entidade;
+using Mercado_Trabalho.Repositorio;
 using Mercado_Trabalho.Servico;
 
 namespace Mercado_Trabalho.UI
@@ -14,6 +15,8 @@ namespace Mercado_Trabalho.UI
         {
             Console.Clear();
             ProdutosServico produtosServico = new ProdutosServico();
+            ProdutoRepositorio produtoRepositorio = new ProdutoRepositorio();
+
             bool executar = true;
             do
             {
@@ -21,7 +24,7 @@ namespace Mercado_Trabalho.UI
                 Console.WriteLine("Informe o menu desejado");
                 Console.WriteLine("1 para cadastrar");
                 Console.WriteLine("2 para listar");
-                Console.WriteLine("3 para compras");
+                Console.WriteLine("3 para atualizar produto");
                 Console.WriteLine("4 para sair");
                 int opcao = int.Parse(Console.ReadLine());
 
@@ -45,7 +48,7 @@ namespace Mercado_Trabalho.UI
                             produto.Validade = Console.ReadLine();
 
                             //Console.WriteLine("Informe o codigo");
-                            produto.CodigoProduto = Guid.NewGuid();
+                            produto.Id = Guid.NewGuid();
 
                             produtosServico.Criar(produto);
                             Console.Clear();
@@ -61,7 +64,8 @@ namespace Mercado_Trabalho.UI
                                 Console.WriteLine();
                                 Console.WriteLine("Nome: " + produto.Nome);
                                 Console.WriteLine("Peso: " + produto.Peso + produto.UnidadeMedida);
-                                Console.WriteLine("Codigo " + produto.CodigoProduto);
+                                Console.WriteLine("Id " + produto.Id);
+                                Console.WriteLine("Codigo" + produto.CodigoProduto);
                                 Console.WriteLine("Validade: " + produto.Validade);
                             });
 
@@ -69,37 +73,20 @@ namespace Mercado_Trabalho.UI
                         }
                     case 3:
                         {
-                            Produtos desejos = new Produtos();
-                            List<Produtos> produtos = produtosServico.BuscarTodos();
-                            produtos.ForEach(produto =>
-                            {
-                                Console.WriteLine();
-                                Console.WriteLine("Nome: " + produto.Nome);
-                                Console.WriteLine("Peso: " + produto.Peso + produto.UnidadeMedida);
-                                Console.WriteLine("Codigo " + produto.CodigoProduto);
-                                Console.WriteLine("Validade: " + produto.Validade);
-                            });
+                            Produtos produtos = new();
 
-                            
-                            Console.WriteLine("Quantos itens você deseja comprar?");
-                            int itens = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Digite o codigo do produto que deseja atualizar.");
+                            produtosServico.BuscarPeloCodigo(Console.ReadLine());
 
-                            for (int i = 0; i < itens; i++)
-                            {
-                                Console.Write($"Nome do {i}° produto: ");
-                                desejos.Nome = Console.ReadLine();
-                                Console.WriteLine();
 
-                                Console.Write($"Peso: ");
-                                desejos.Peso = Double.Parse(Console.ReadLine());
-                                Console.WriteLine();
+                            Console.WriteLine("novo codigo: ");
+                            produtos.CodigoProduto = Console.ReadLine();
 
-                                Console.Write($"Quantidade: ");
-                                int quant = int.Parse(Console.ReadLine());
-                                Console.WriteLine();
-                                
-                                Console.WriteLine();
-                            }
+                            produtosServico.Atualizar(produtos);
+
+                            Console.Clear();
+
+
 
                             break;
                         }

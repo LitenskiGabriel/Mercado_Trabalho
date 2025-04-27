@@ -66,7 +66,7 @@ namespace Mercado_Trabalho.Repositorio
             clienteRegistrando.Id = Guid.NewGuid();
             _clientes.Add(clienteRegistrando);
             Salvar();
-        }
+        }   
 
         public void Excluir(Cliente clienteExcluindo)
         {

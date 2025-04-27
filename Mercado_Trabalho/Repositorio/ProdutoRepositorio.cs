@@ -41,12 +41,25 @@ namespace Mercado_Trabalho.Repositorio
 
         public void Atualizar(Produtos produtoAtualizando)
         {
-            throw new NotImplementedException();
+            Produtos produtos = BuscarPeloCodigo(produtoAtualizando.CodigoProduto);
+
+            if (produtos is not null)
+            {
+                Console.WriteLine("1 " + produtos.Nome);
+                produtos.CodigoProduto = produtoAtualizando.CodigoProduto;
+            }
+            else { Console.WriteLine("burro"); }
+            Salvar();
         }
 
         public Produtos BuscarPeloId(Guid id)
         {
             return _produtos.FirstOrDefault(produtos => produtos.Id == id);
+        }
+
+        public Produtos BuscarPeloCodigo(string codigo)
+        {
+            return _produtos.FirstOrDefault(produtos => produtos.CodigoProduto == codigo, null);
         }
 
         public List<Produtos> BuscarTodos()

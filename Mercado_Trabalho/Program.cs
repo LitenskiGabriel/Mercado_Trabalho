@@ -22,7 +22,8 @@ namespace Mercado_Trabalho
                 Console.WriteLine("Informe o menu desejado");
                 Console.WriteLine("1 para produto");
                 Console.WriteLine("2 para cliente");
-                Console.WriteLine("3 para sair");
+                Console.WriteLine("3 para compras");
+                Console.WriteLine("4 para sair");
                 int opcao = int.Parse(Console.ReadLine());
 
                 switch (opcao)
@@ -38,6 +39,11 @@ namespace Mercado_Trabalho
                             break;
                         }
                     case 3:
+                        {
+                            ComprasUI.ExecutarCompras();
+                            break;
+                        }
+                    case 4:
                         {
                             executar = false;
                             break;

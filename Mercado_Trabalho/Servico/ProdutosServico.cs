@@ -12,7 +12,6 @@ namespace Mercado_Trabalho.Servico
     public class ProdutosServico : ICRUD<Produtos>
     {
         ProdutoRepositorio _produtoRepositorio = new ProdutoRepositorio();
-
         public void Atualizar(Produtos entidade)
         {
             _produtoRepositorio.Atualizar(entidade);
@@ -27,7 +26,11 @@ namespace Mercado_Trabalho.Servico
         {
             return _produtoRepositorio.BuscarTodos();
         }
+        public Produtos BuscarPeloCodigo(string codigo)
+        {
 
+            return _produtoRepositorio.BuscarPeloCodigo(codigo);
+        }
         public void Criar(Produtos entidade)
         {
             _produtoRepositorio.Criar(entidade);

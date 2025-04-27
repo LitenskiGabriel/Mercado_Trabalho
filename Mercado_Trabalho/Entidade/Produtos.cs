@@ -11,7 +11,7 @@ namespace Mercado_Trabalho.Entidade
         public string UnidadeMedida {  get; set; }
         public string Nome {  get; set; }
         public string Validade {  get; set; }
-        public Guid CodigoProduto { get; set; }
+        public String CodigoProduto { get; set; }
         public Guid Id { get; set; }
         public double Peso {  get; set; }
 
