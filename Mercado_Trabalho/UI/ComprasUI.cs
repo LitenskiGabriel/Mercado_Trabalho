@@ -12,6 +12,9 @@ namespace Mercado_Trabalho.UI
     {
         public static void ExecutarCompras()
         {
+            List<Produtos>  _produtosCarrinho = new List<Produtos>();
+            List<int> itens = new List<int>();
+
             ProdutosServico produtosServico = new ProdutosServico();
             Produtos desejos = new Produtos();
 
@@ -22,31 +25,27 @@ namespace Mercado_Trabalho.UI
                 Console.WriteLine();
                 Console.WriteLine("Nome: " + produto.Nome);
                 Console.WriteLine("Peso: " + produto.Peso + produto.UnidadeMedida);
+                Console.WriteLine("Código: "+ produto.CodigoProduto);
             });
 
             produtos.ForEach(produto =>
             {
-                
-                Console.WriteLine("Quais são os itens que você deseja comprar?");
+                Console.WriteLine();   
+                Console.WriteLine("Digite os códigos dos itens que você deseja comprar:");
 
-                int itens = int.Parse(Console.ReadLine());
 
-                for (int i = 0; i < itens; i++)
+                do
                 {
-                    Console.Write($"Nome do {i+1}° produto: ");
-                    desejos.Nome = Console.ReadLine();
-                    Console.WriteLine();
+                    int itensNum = int.Parse(Console.ReadLine());
 
-                    Console.Write($"Peso: ");
-                    desejos.Peso = Double.Parse(Console.ReadLine());
-                    Console.WriteLine();
+                    Console.WriteLine("Mais algo?(n para parar, código para continuar.)");
+                    
+                    if ()
+                    {
 
-                    Console.Write($"Quantidade: ");
-                    int quant = int.Parse(Console.ReadLine());
-                    Console.WriteLine();
-
-                    Console.WriteLine();
-                }
+                    }
+                }while()
+                
             });
         }
     }

@@ -45,10 +45,12 @@ namespace Mercado_Trabalho.Repositorio
 
             if (produtos is not null)
             {
-                Console.WriteLine("1 " + produtos.Nome);
+                produtos.Nome = produtoAtualizando.Nome;
+                produtos.Peso = produtoAtualizando.Peso;
                 produtos.CodigoProduto = produtoAtualizando.CodigoProduto;
             }
-            else { Console.WriteLine("burro"); }
+            else { Console.WriteLine("Produto não encontrado!"); }
+
             Salvar();
         }
 
@@ -59,7 +61,7 @@ namespace Mercado_Trabalho.Repositorio
 
         public Produtos BuscarPeloCodigo(string codigo)
         {
-            return _produtos.FirstOrDefault(produtos => produtos.CodigoProduto == codigo, null);
+            return _produtos.FirstOrDefault(produtos => produtos.CodigoProduto == codigo);
         }
 
         public List<Produtos> BuscarTodos()

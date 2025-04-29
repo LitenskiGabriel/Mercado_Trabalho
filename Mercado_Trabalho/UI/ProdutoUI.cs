@@ -64,8 +64,7 @@ namespace Mercado_Trabalho.UI
                                 Console.WriteLine();
                                 Console.WriteLine("Nome: " + produto.Nome);
                                 Console.WriteLine("Peso: " + produto.Peso + produto.UnidadeMedida);
-                                Console.WriteLine("Id " + produto.Id);
-                                Console.WriteLine("Codigo" + produto.CodigoProduto);
+                                Console.WriteLine("Codigo: " + produto.CodigoProduto);
                                 Console.WriteLine("Validade: " + produto.Validade);
                             });
 
@@ -75,15 +74,30 @@ namespace Mercado_Trabalho.UI
                         {
                             Produtos produtos = new();
 
-                            Console.WriteLine("Digite o codigo do produto que deseja atualizar.");
-                            produtosServico.BuscarPeloCodigo(Console.ReadLine());
+                            Console.WriteLine("Digite o código do produto que deseja atualizar.");
+                            string codigoAntigo = Console.ReadLine();
+
+                            Produtos produto = produtosServico.BuscarPeloCodigo(codigoAntigo);
 
 
-                            Console.WriteLine("novo codigo: ");
-                            produtos.CodigoProduto = Console.ReadLine();
+                            if (produto is not null)
+                            {
+                                Console.WriteLine("Novo nome:");
+                                string novoNome = Console.ReadLine();
 
-                            produtosServico.Atualizar(produtos);
+                                Console.WriteLine("Novo peso:");
+                                double novoPeso = double.Parse(Console.ReadLine());
 
+                                Console.WriteLine("Novo código: ");
+                                string novoCodigo = Console.ReadLine();
+
+                                produto.Peso = novoPeso;
+                                produto.Nome = novoNome;
+                                produto.CodigoProduto = novoCodigo;
+
+                                produtosServico.Atualizar(produto);
+                                Console.WriteLine("Produto atualizado com sucesso.");
+                            }
                             Console.Clear();
 
 
